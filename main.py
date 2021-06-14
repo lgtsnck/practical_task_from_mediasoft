@@ -1,4 +1,0 @@
-"""
-Initial commit
-Develop branch
-"""
