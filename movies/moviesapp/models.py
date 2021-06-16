@@ -96,7 +96,7 @@ class Rating(models.Model):
     """Рейтинг"""
     ip = models.CharField("IP адрес", max_length=20)
     value = models.SmallIntegerField("Значение", default=0)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Фильм")
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Фильм", related_name="ratings")
 
     def __str__(self):
         return f"{self.value} - {self.movie}"
@@ -104,3 +104,4 @@ class Rating(models.Model):
     class Meta:
         verbose_name = "Рейтинг"
         verbose_name_plural = "Рейтинги"
+        ordering = ["-value"]
