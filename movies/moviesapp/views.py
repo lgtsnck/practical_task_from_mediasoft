@@ -1,3 +1,6 @@
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -6,20 +9,33 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
 from .models import Movie
+from .serializers import MovieListSerializers, MovieDetailSerializers
 
 
 # Create your views here.
 
-class MoviesView(ListView):
+class MoviesListView(APIView):
     """Список фильмов"""
-    model = Movie
-    queryset = Movie.objects.all()
+
+    def get(self, request):
+        movies = Movie.objects.all()
+        serializer = MovieListSerializers(movies, many=True)
+        return Response(serializer.data)
+
+    # model = Movie
+    # queryset = Movie.objects.all()
 
 
-class MovieDetailView(DetailView):
+class MovieDetailView(APIView):
     """Детали фильма"""
-    model = Movie
-    slug_field = "url"
+
+    def get(self, request, pk):
+        movie = Movie.objects.get(id=pk)
+        serializer = MovieDetailSerializers(movie)
+        return Response(serializer.data)
+
+    # model = Movie
+    # slug_field = "url"
 
 
 class RegisterUser(CreateView):
