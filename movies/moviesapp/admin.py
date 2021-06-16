@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Actor, Genre, Movie, Shots
+from .models import Category, Actor, Genre, Movie, Shots, Rating
 from django.utils.safestring import mark_safe
 
 
@@ -61,6 +61,11 @@ class ActorAdmin(admin.ModelAdmin):
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     list_display = ("name", "url")
+
+
+@admin.register(Rating)
+class GenreAdmin(admin.ModelAdmin):
+    list_display = ("value", "movie", "ip")
 
 
 @admin.register(Shots)
