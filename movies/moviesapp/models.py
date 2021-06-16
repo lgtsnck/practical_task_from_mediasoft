@@ -90,3 +90,17 @@ class Shots(models.Model):
     class Meta:
         verbose_name = "Кадр фильма"
         verbose_name_plural = "Кадры фильма"
+
+
+class Rating(models.Model):
+    """Рейтинг"""
+    ip = models.CharField("IP адрес", max_length=20)
+    value = models.SmallIntegerField("Значение", default=0)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Фильм")
+
+    def __str__(self):
+        return f"{self.value} - {self.movie}"
+
+    class Meta:
+        verbose_name = "Рейтинг"
+        verbose_name_plural = "Рейтинги"
