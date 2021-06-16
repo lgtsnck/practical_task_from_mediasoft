@@ -6,6 +6,11 @@ from .views import logout_user
 urlpatterns = [
     path("movies/", views.MoviesListView.as_view(), name="movies_view"),
     path("movie/<int:pk>/", views.MovieDetailView.as_view()),
+    path("rating/", views.AddRatingView.as_view()),
+    path("actors/", views.ActorListView.as_view()),
+    path("actor/<int:pk>/", views.ActorDetailView.as_view()),
+    path("genres/", views.GenreListView.as_view()),
+    path("genre/<int:pk>/", views.GenreDetailView.as_view()),
     path("register/", views.RegisterUser.as_view(), name="register"),
     path("login/", views.LoginUser.as_view(), name="login"),
     path("logout/", logout_user, name="logout"),
